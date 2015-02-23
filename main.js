@@ -10,7 +10,9 @@ require("babel/register");
 
 /******************************************************************************/
 
-// exports.foo = require('./src/foo');
+exports.create = require('./src/create');
+exports.build = require('./src/build');
+exports.run = require('./src/run');
 
 /******************************************************************************/
 
