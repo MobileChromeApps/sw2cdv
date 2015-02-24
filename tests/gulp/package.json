@@ -9,6 +9,7 @@
   "author": "The Chrome Team",
   "license": "Apache version 2.0",
   "dependencies": {
-    "gulp": "^3.8.11"
+    "gulp": "^3.8.11",
+    "sw2cdv": "file:../.."
   }
 }
