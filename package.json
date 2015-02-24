@@ -28,7 +28,10 @@
   "homepage": "https://github.com/MobileChromeApps/sw2cdv",
   "dependencies": {
     "babel": "^4.4.5",
+    "http-server": "^0.7.5",
     "lodash": "^3.3.0",
+    "minimist": "^1.1.0",
+    "portfinder": "^0.4.0",
     "q": "^1.2.0"
   }
 }
