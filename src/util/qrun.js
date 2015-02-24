@@ -21,7 +21,7 @@ exports = module.exports = function qrun(cmd, opts = {}, ...args) {
     opts = {};
   }
   opts.silent = (opts.silent === undefined) ? true : opts.silent;
-  opts.echoCommand = (opts.echoCommand === undefined) ? true : opts.echoCommand;
+  opts.echoCommand = (opts.echoCommand === undefined) ? false : opts.echoCommand;
 
   let command = `${cmd} ${_.flatten(args).join(' ')}`;
 

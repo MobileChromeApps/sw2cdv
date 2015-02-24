@@ -19,7 +19,7 @@ exports = module.exports = function qspawn(cmd, opts = {}, ...args) {
     opts = {};
   }
   opts.stdio = (opts.stdio === undefined) ? 'inherit' : opts.stdio;
-  opts.echoCommand = (opts.echoCommand === undefined) ? true : opts.echoCommand;
+  opts.echoCommand = (opts.echoCommand === undefined) ? false : opts.echoCommand;
   args = _.flatten(args);
 
   if (opts.echoCommand) {

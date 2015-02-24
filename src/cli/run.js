@@ -7,7 +7,7 @@ let path = require('path');
 
 /******************************************************************************/
 
-exports = module.exports = function run() {
+function runInChromeLocally(argv) {
   let scope = {};
 
   let httpServer = require('http-server');
@@ -51,6 +51,16 @@ exports = module.exports = function run() {
       // Right now, we cannot know when the page has finished loading
       // server.close();
     });
+}
+
+/******************************************************************************/
+
+exports = module.exports = function run(argv) {
+  if (argv._[1] === 'chrome') {
+    return runInChromeLocally(argv);
+  }
+
+  return Q.reject('Not a valid target');
 };
 
 /******************************************************************************/
