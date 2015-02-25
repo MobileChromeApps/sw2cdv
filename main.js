@@ -17,7 +17,9 @@ exports.run = require('./src/run');
 /******************************************************************************/
 
 if (require.main === module) {
-  require('./src/cli')().catch(function(err) {
-    console.error('[Error]:', err);
-  }).done();
+  require('./src/cli')()
+    .catch(function(err) {
+      console.error('[Error]:', err);
+    })
+    .done();
 }

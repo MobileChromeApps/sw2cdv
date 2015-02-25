@@ -8,7 +8,7 @@ let fs = require('fs');
 
 /******************************************************************************/
 
-exports.runInChrome = function runInChrome() {
+exports.chrome = function runChrome(root) {
   let scope = {};
 
   let httpServer = require('http-server');
@@ -17,7 +17,6 @@ exports.runInChrome = function runInChrome() {
 
   const basePort = 8080;
   const host = 'localhost';
-  const root = fs.existsSync('app') ? './app' : './';
 
   let server = httpServer.createServer({
     root: root,
@@ -56,5 +55,17 @@ exports.runInChrome = function runInChrome() {
       // server.close();
     });
 }
+
+/******************************************************************************/
+
+exports.android = function runAndroid(root) {
+  return Q.reject('Not implemented');
+};
+
+/******************************************************************************/
+
+exports.ios = function runIos(root) {
+  return Q.reject('Not implemented');
+};
 
 /******************************************************************************/

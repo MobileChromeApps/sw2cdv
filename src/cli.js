@@ -7,22 +7,36 @@ let minimist = require('minimist');
 
 /******************************************************************************/
 
+let commands = {};
+
+/******************************************************************************/
+
+commands.run = (args) => {
+  if (args._[1] === 'chrome') {
+    let root = './';
+    if (args._[2]) {
+      root = args._[2];
+    } else if (fs.existsSync('app')) {
+      root = './app';
+    }
+    return require('./run').chrome();
+  }
+
+  return Q.reject('Not a valid target');
+};
+
+/******************************************************************************/
+
 exports = module.exports = () => {
-  let targets = {
-    run: () => {
-      return require('./cli/run')(argv);
-    },
-  };
+  let args = minimist(process.argv.slice(2));
+  let command = args._[0];
 
-  let argv = minimist(process.argv.slice(2));
-  let target = argv._[0];
-
-  if (!(target in targets)) {
+  if (!(command in commands)) {
     // TODO: Usage
     return Q.reject('No valid command');
   }
 
-  return targets[target]();
+  return commands[command](args);
 };
 
 /******************************************************************************/

@@ -1,1 +1,19 @@
-// TODO: transform app/ using gulp build system, and provide a build target to create a cordova application
+'use strict';
+
+/******************************************************************************/
+
+var gulp = require('gulp');
+
+/******************************************************************************/
+
+gulp.task('runInChrome', function() {
+  require('sw2cdv').run.chrome('./app');
+});
+
+/******************************************************************************/
+
+gulp.task('default', ['runInChrome'], function() {
+});
+
+/******************************************************************************/
+
