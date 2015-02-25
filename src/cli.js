@@ -4,6 +4,7 @@
 
 let Q = require('q');
 let minimist = require('minimist');
+let fs = require('fs');
 
 /******************************************************************************/
 
@@ -19,7 +20,7 @@ commands.run = (args) => {
     } else if (fs.existsSync('app')) {
       root = './app';
     }
-    return require('./run').chrome();
+    return require('./run').chrome(root);
   }
 
   return Q.reject('Not a valid target');
