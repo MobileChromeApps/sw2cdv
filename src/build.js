@@ -24,7 +24,7 @@ function build(prjInfo) {
     prjInfo.paths.template = path.join(__dirname, '../node_modules/cordova-ios');
 
     if (!prjInfo.cfg) {
-        var cfg = prjInfo.cfg = new cordovaLib.ConfigParser(path.join(__dirname, '/defaultConfig.xml'));
+        var cfg = prjInfo.cfg = new cordovaLib.ConfigParser(path.join(__dirname, '..', 'assets', 'defaultConfig.xml'));
         cfg.setName(prjInfo.appName || 'DefaultSwApp');
         cfg.setPackageName(prjInfo.appId || 'io.cordova.default.sw.app');
         // TODO: Change sw.js <preference>, add this functionality to ConfigParser
