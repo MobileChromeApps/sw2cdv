@@ -21,5 +21,4 @@ if (require.main === module) {
     .catch(function(err) {
       console.error('[Error]:', err);
     })
-    .done();
 }

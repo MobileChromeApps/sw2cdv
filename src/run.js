@@ -5,12 +5,11 @@
 let Q = require('q');
 let path = require('path');
 let fs = require('fs');
+let co = require('co');
 
 /******************************************************************************/
 
 exports.chrome = function runChrome(root) {
-  let scope = {};
-
   let httpServer = require('http-server');
   let portfinder = require('portfinder');
   let openInChrome = require('./util/open-in-chrome');
@@ -39,21 +38,13 @@ exports.chrome = function runChrome(root) {
 
   portfinder.basePort = basePort;
 
-  return Q.when()
-    .then(() => {
-      return Q.ninvoke(portfinder, "getPort");
-    })
-    .then((port) => {
-      scope.port = port;
-      return Q.ninvoke(server, "listen", port, host);
-    })
-    .then(() => {
-      return openInChrome(`http://${host}:${scope.port}`);
-    })
-    .then(() => {
-      // Right now, we cannot know when the page has finished loading
-      // server.close();
-    });
+  return co(function*() {
+    let port = yield Q.ninvoke(portfinder, "getPort");
+    yield Q.ninvoke(server, "listen", port, host);
+    yield openInChrome(`http://${host}:${port}`);
+    // Right now, we cannot know when the page has finished loading
+    // server.close();
+  });
 }
 
 /******************************************************************************/

@@ -5,6 +5,7 @@
 let Q = require('q');
 let child_process = require('child_process');
 let _ = require('lodash');
+let co = require('co');
 
 /******************************************************************************/
 
@@ -29,9 +30,11 @@ exports = module.exports = function qrun(cmd, opts = {}, ...args) {
     console.info('[Running]:', command);
   }
 
-  return Q.nfcall(child_process.exec, command)
-    .then(([stdout, stderr]) => ({
-        stdout: stdout.trim(),
-        stderr: stderr.trim()
-      }));
+  return co(function*() {
+    let [stdout, stderr] = yield Q.nfcall(child_process.exec, command);
+    return {
+      stdout: stdout.trim(),
+      stderr: stderr.trim()
+    };
+  });
 };
