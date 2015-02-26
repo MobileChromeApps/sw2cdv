@@ -13,7 +13,7 @@ cordovaLib.events.on('verbose', console.log);
 var sw2cdv = require('./main');
 var path = require('path');
 var shell = require('shelljs');
-//var build = require('./src/build');
+// var build = require('./src/build');
 
 var prjInfo = {
     paths: {
@@ -26,3 +26,5 @@ var prjInfo = {
 
 shell.rm('-rf', prjInfo.paths.root);
 sw2cdv.build(prjInfo).done();
+
+// sw2cdv.run.ios(prjInfo.paths.root).done();

@@ -38,6 +38,8 @@ gulp.task('link', ['unlink'], function() {
     fs.symlinkSync(appPath, 'app');
 });
 
+/******************************************************************************/
+
 gulp.task('unlink', function() {
     if (!fs.existsSync('app'))
         return;
@@ -52,20 +54,27 @@ gulp.task('unlink', function() {
 /******************************************************************************/
 
 gulp.task('buildios', ['clean'], function() {
-    var nopt = require('nopt');
-    var args = nopt({'app': String});
-    var app = args.app || 'basic';
-
     // Project definitions
+    if (!fs.existsSync('build')){
+        fs.mkdirSync('build');
+    }
+
     var prjInfo = {
         paths: {
-            www: path.resolve('../samples/service-worker/', app),  // looking staring at
-            root: path.resolve('build'),
+            www: path.resolve('app'),
+            root: path.resolve('build', 'ios'),
         },
         appName: 'HelloSwApp',
         swFile: 'service-worker.js',  // Not yet plumbed through, must be service-worker.js
     };
 
-    var sw2cdv = require('../../main');
+    var sw2cdv = require('sw2cdv');
     return sw2cdv.build(prjInfo).done();
+});
+
+/******************************************************************************/
+
+gulp.task('runios', function() {
+    var sw2cdv = require('sw2cdv');
+    return sw2cdv.run.ios(path.resolve('build', 'ios'));
 });
