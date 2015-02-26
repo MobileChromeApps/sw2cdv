@@ -14,17 +14,17 @@ function build(prjInfo) {
 
     // Todo, should be in node_modules
     var sWpluginDirs = [
-        path.resolve('../PromisesPlugin'),
-        path.resolve('../cordova-plugin-serviceworker'),
+        path.join(__dirname, '../../PromisesPlugin'),
+        path.join(__dirname, '../../cordova-plugin-serviceworker'),
     ];
 
     prjInfo.paths.plugins = (prjInfo.paths.plugins || []).concat(sWpluginDirs);
 
     // Should be unnecessary when IosProject lives in cordova-ios
-    prjInfo.paths.template = path.resolve('./node_modules/cordova-ios');
+    prjInfo.paths.template = path.join(__dirname, '../node_modules/cordova-ios');
 
     if (!prjInfo.cfg) {
-        var cfg = prjInfo.cfg = new cordovaLib.ConfigParser(path.resolve('./src/defaultConfig.xml'));
+        var cfg = prjInfo.cfg = new cordovaLib.ConfigParser(path.join(__dirname, '/defaultConfig.xml'));
         cfg.setName(prjInfo.appName || 'DefaultSwApp');
         cfg.setPackageName(prjInfo.appId || 'io.cordova.default.sw.app');
         // TODO: Change sw.js <preference>, add this functionality to ConfigParser
@@ -33,7 +33,8 @@ function build(prjInfo) {
 
     var proj = new IosProject();
 
-    return proj.create(prjInfo);
+    return proj.create(prjInfo)
+        .then(proj.build);
 }
 
 /******************************************************************************/

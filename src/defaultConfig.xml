@@ -9,5 +9,5 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <preference name="service_worker" value="sw.js" />
+    <preference name="service_worker" value="service-worker.js" />
 </widget>
