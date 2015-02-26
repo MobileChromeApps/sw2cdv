@@ -5,7 +5,7 @@
 /******************************************************************************/
 
 module.exports = exports = function openInChrome(uri, canary = true) {
-  let qspawn = require('./qspawn');
+  let pSpawn = require('./pSpawn');
 
   let chromeExe = 'Chrome' + (canary ? ' Canary' : '');
   let chromeArgs = [
@@ -14,9 +14,9 @@ module.exports = exports = function openInChrome(uri, canary = true) {
     ];
 
   if (process.platform === 'win32') {
-    return qspawn('cmd', ['/s', '/c', 'start', chromeExe].concat(chromeArgs));
+    return pSpawn('cmd', ['/s', '/c', 'start', chromeExe].concat(chromeArgs));
   } else if (process.platform === 'darwin') {
     chromeExe = 'Google ' + chromeExe;
-    return qspawn('open', ['-n', '-a', chromeExe, '--args'].concat(chromeArgs));
+    return pSpawn('open', ['-n', '-a', chromeExe, '--args'].concat(chromeArgs));
   }
 };

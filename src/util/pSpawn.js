@@ -2,18 +2,17 @@
 
 /******************************************************************************/
 
-let Q = require('q');
 let child_process = require('child_process');
 let _ = require('lodash');
 
 /******************************************************************************/
 
 // Usage:
-// qspawn('git', ['arg1', 'arg2', 'arg3'])
-// qspawn('git', 'arg1', 'arg2', 'arg3')
-// qspawn('git', { stdio: 'ignore' }, ['arg1', 'arg2', 'arg3'])
-// qspawn('git', { stdio: 'pipe'   }, 'arg1', 'arg2', 'arg3')
-exports = module.exports = function qspawn(cmd, opts = {}, ...args) {
+// pSpawn('git', ['arg1', 'arg2', 'arg3'])
+// pSpawn('git', 'arg1', 'arg2', 'arg3')
+// pSpawn('git', { stdio: 'ignore' }, ['arg1', 'arg2', 'arg3'])
+// pSpawn('git', { stdio: 'pipe'   }, 'arg1', 'arg2', 'arg3')
+exports = module.exports = function pSpawn(cmd, opts = {}, ...args) {
   if (!_.isPlainObject(opts)) {
     args.unshift(opts);
     opts = {};
@@ -26,7 +25,7 @@ exports = module.exports = function qspawn(cmd, opts = {}, ...args) {
     console.info('[Spawning]:', cmd, args);
   }
 
-  return Q.Promise(function(resolve, reject) {
+  return new Promise(function(resolve, reject) {
     let child = child_process.spawn(cmd, args, opts);
     var didReturn = false;
     child.on('error', function(e) {
