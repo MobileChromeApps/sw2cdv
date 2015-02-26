@@ -10,7 +10,9 @@
   "license": "Apache version 2.0",
   "dependencies": {
     "browser-sync": "^2.2.1",
+    "del": "^1.1.1",
     "gulp": "^3.8.11",
+    "nopt": "^3.0.1",
     "run-sequence": "^1.0.2",
     "sw2cdv": "file:../.."
   }

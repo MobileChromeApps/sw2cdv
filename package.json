@@ -28,6 +28,7 @@
   "homepage": "https://github.com/MobileChromeApps/sw2cdv",
   "dependencies": {
     "babel": "^4.4.5",
+    "cordova-lib": "^4.2.0",
     "http-server": "^0.7.5",
     "lodash": "^3.3.0",
     "minimist": "^1.1.0",
