@@ -56,7 +56,14 @@ exports.android = function runAndroid(root) {
 /******************************************************************************/
 
 exports.ios = function runIos(root) {
-  return Q.reject('Not implemented');
+  var cordovaLib = require('cordova-lib');
+  var IosProject = cordovaLib.IosProject;
+
+  var proj = new IosProject();
+  return proj.open(root)
+    .then(() => {
+      proj.run();
+    });
 };
 
 /******************************************************************************/
