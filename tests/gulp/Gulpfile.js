@@ -69,7 +69,12 @@ gulp.task('buildios', ['clean'], function() {
     };
 
     var sw2cdv = require('sw2cdv');
-    return sw2cdv.build(prjInfo).done();
+
+    return sw2cdv.create(prjInfo)
+        .then(function() {
+            return sw2cdv.build(prjInfo);
+        })
+        .done();
 });
 
 /******************************************************************************/
