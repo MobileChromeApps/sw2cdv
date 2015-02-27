@@ -1,4 +1,7 @@
 'use strict';
+var path = require('path');
+var cordovaLib = require('cordova-lib');
+var IosProject = cordovaLib.IosProject;
 
 /******************************************************************************/
 
