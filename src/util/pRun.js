@@ -5,6 +5,7 @@
 let child_process = require('child_process');
 let _ = require('lodash');
 let co = require('co');
+let Q = require('q');
 
 /******************************************************************************/
 
