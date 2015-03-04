@@ -25,7 +25,7 @@ gulp.task('link', ['unlink'], function() {
     var nopt = require('nopt');
     var args = nopt({'app': String});
     var app = args.app || 'basic';
-    var appPath = path.join('..', 'samples', 'service-worker', app);
+    var appPath = path.join('..', 'GoogleChromeSamples', 'service-worker', app);
     if (!fs.existsSync(appPath)) {
         console.error('App "' + app + '" not found in ../samples/service-worker/');
         return;
