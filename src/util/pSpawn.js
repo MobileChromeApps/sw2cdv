@@ -27,7 +27,7 @@ exports = module.exports = function pSpawn(cmd, opts = {}, ...args) {
 
   return new Promise(function(resolve, reject) {
     let child = child_process.spawn(cmd, args, opts);
-    var didReturn = false;
+    let didReturn = false;
     child.on('error', function(e) {
       if (!didReturn) {
         didReturn = true;

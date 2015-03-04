@@ -1,13 +1,15 @@
 'use strict';
-var path = require('path');
-var cordovaLib = require('cordova-lib');
-var IosProject = cordovaLib.IosProject;
 
 /******************************************************************************/
 
-exports = module.exports = function create(prjInfo) {
+let path = require('path');
+let cordovaLib = require('cordova-lib');
+
+/******************************************************************************/
+
+function createIos(prjInfo) {
     // Todo, should be in node_modules
-    var sWpluginDirs = [
+    let sWpluginDirs = [
         path.join(__dirname, '../../PromisesPlugin'),
         path.join(__dirname, '../../cordova-plugin-serviceworker'),
     ];
@@ -18,15 +20,25 @@ exports = module.exports = function create(prjInfo) {
     prjInfo.paths.template = path.join(__dirname, '../node_modules/cordova-ios');
 
     if (!prjInfo.cfg) {
-        var cfg = prjInfo.cfg = new cordovaLib.ConfigParser(path.join(__dirname, '..', 'assets', 'defaultConfig.xml'));
+        let cfg = prjInfo.cfg = new cordovaLib.ConfigParser(path.join(__dirname, '..', 'assets', 'defaultConfig.xml'));
         cfg.setName(prjInfo.appName || 'DefaultSwApp');
         cfg.setPackageName(prjInfo.appId || 'io.cordova.default.sw.app');
         // TODO: Change sw.js <preference>, add this functionality to ConfigParser
         // cfg.setGlobalPreference(name="service_worker" value = prjInfo.swFile || "sw.js")
     }
 
-    var proj = new IosProject();
+    let IosProject = cordovaLib.IosProject;
+    let proj = new IosProject();
     return proj.create(prjInfo)
 };
 
 /******************************************************************************/
+
+function createAndroid(prjInfo) {
+    return Q.reject('Not implemented');
+}
+
+/******************************************************************************/
+
+module.exports.ios = createIos;
+module.exports.android = createAndroid;

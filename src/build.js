@@ -3,15 +3,15 @@
 /******************************************************************************/
 
 // This should be eventaually replaced with
-// var IosProject = require('cordova-ios');
-var cordovaLib = require('cordova-lib');
-var IosProject = cordovaLib.IosProject;
+// let IosProject = require('cordova-ios');
+let cordovaLib = require('cordova-lib');
 
 /******************************************************************************/
 
-exports = module.exports = function build(prjInfo) {
+function buildIos(prjInfo) {
     // Requires: prjInfo.paths.www
 
+    let IosProject = cordovaLib.IosProject;
     let proj = new IosProject();
     return proj.open(prjInfo.paths.root)
         .then(() => {
@@ -20,3 +20,12 @@ exports = module.exports = function build(prjInfo) {
 };
 
 /******************************************************************************/
+
+function buildAndroid(prjInfo) {
+  return Q.reject('Not implemented');
+};
+
+/******************************************************************************/
+
+module.exports.ios = buildIos;
+module.exports.android = buildAndroid;

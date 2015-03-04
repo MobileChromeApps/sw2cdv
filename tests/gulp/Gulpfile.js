@@ -15,11 +15,6 @@ gulp.task('runInChrome', function() {
 
 /******************************************************************************/
 
-gulp.task('default', ['runInChrome'], function() {
-});
-
-/******************************************************************************/
-
 gulp.task('clean', function(cb) {
     del(['build'], cb);
 });
@@ -55,9 +50,7 @@ gulp.task('unlink', function() {
 
 gulp.task('buildios', ['clean'], function() {
     // Project definitions
-    if (!fs.existsSync('build')){
-        fs.mkdirSync('build');
-    }
+    fs.mkdirSync('build');
 
     var prjInfo = {
         paths: {
@@ -69,10 +62,9 @@ gulp.task('buildios', ['clean'], function() {
     };
 
     var sw2cdv = require('sw2cdv');
-
-    return sw2cdv.create(prjInfo)
+    return sw2cdv.create.ios(prjInfo)
         .then(function() {
-            return sw2cdv.build(prjInfo);
+            return sw2cdv.build.ios(prjInfo);
         })
         .done();
 });
@@ -83,3 +75,9 @@ gulp.task('runios', function() {
     var sw2cdv = require('sw2cdv');
     return sw2cdv.run.ios(path.resolve('build', 'ios'));
 });
+
+/******************************************************************************/
+
+gulp.task('default', ['runInChrome'], function() {
+});
+

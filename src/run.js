@@ -56,10 +56,10 @@ exports.android = function runAndroid(root) {
 /******************************************************************************/
 
 exports.ios = function runIos(root) {
-  var cordovaLib = require('cordova-lib');
-  var IosProject = cordovaLib.IosProject;
+  let cordovaLib = require('cordova-lib');
+  let IosProject = cordovaLib.IosProject;
 
-  var proj = new IosProject();
+  let proj = new IosProject();
   return proj.open(root)
     .then(() => {
       proj.run();
