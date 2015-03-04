@@ -1,3 +1,6 @@
 [submodule "tests/samples"]
 	path = tests/GoogleChromeSamples
 	url = https://github.com/GoogleChrome/samples.git
+[submodule "tests/MwoghirenServiceWorkerSample"]
+	path = tests/MwoghirenServiceWorkerSample
+	url = https://github.com/mwoghiren/ServiceWorkerSample.git
