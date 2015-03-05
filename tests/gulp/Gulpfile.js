@@ -49,26 +49,20 @@ gulp.task('unlink', function() {
 
 /******************************************************************************/
 
-var prjInfo = {
-    paths: {
-        www: path.resolve('app'),
-        root: path.resolve('build', 'ios'),
-    },
-    appName: 'HelloSwApp',
-    swFile: 'sw.js',  // Not yet plumbed through, must be service-worker.js
-};
-
 gulp.task('createios', ['clean'], function() {
     // Project definitions
     fs.mkdirSync('build');
 
     var sw2cdv = require('sw2cdv');
-    return sw2cdv.create.ios(prjInfo);
+    return sw2cdv.create.ios({
+        www: path.resolve('app'),
+        root: path.resolve('build', 'ios'),
+    });
 });
 
 gulp.task('buildios', [], function() {
     var sw2cdv = require('sw2cdv');
-    return sw2cdv.build.ios(prjInfo);
+    return sw2cdv.build.ios(path.resolve('build', 'ios'));
 });
 
 gulp.task('runios', function() {

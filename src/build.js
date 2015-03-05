@@ -8,12 +8,10 @@ let cordovaLib = require('cordova-lib');
 
 /******************************************************************************/
 
-function buildIos(prjInfo) {
-    // Requires: prjInfo.paths.www
-
+function buildIos(root) {
     let IosProject = cordovaLib.IosProject;
     let proj = new IosProject();
-    return proj.open(prjInfo.paths.root)
+    return proj.open(root)
         .then(() => {
             return proj.build();
         });
@@ -21,7 +19,7 @@ function buildIos(prjInfo) {
 
 /******************************************************************************/
 
-function buildAndroid(prjInfo) {
+function buildAndroid(root) {
   return Q.reject('Not implemented');
 };
 
