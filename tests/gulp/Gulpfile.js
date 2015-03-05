@@ -6,6 +6,7 @@ var gulp = require('gulp');
 var path = require('path');
 var del = require('del');
 var fs = require('fs');
+var runSeq = require('run-sequence');
 
 /******************************************************************************/
 
@@ -48,32 +49,35 @@ gulp.task('unlink', function() {
 
 /******************************************************************************/
 
-gulp.task('buildios', ['clean'], function() {
+var prjInfo = {
+    paths: {
+        www: path.resolve('app'),
+        root: path.resolve('build', 'ios'),
+    },
+    appName: 'HelloSwApp',
+    swFile: 'sw.js',  // Not yet plumbed through, must be service-worker.js
+};
+
+gulp.task('createios', ['clean'], function() {
     // Project definitions
     fs.mkdirSync('build');
 
-    var prjInfo = {
-        paths: {
-            www: path.resolve('app'),
-            root: path.resolve('build', 'ios'),
-        },
-        appName: 'HelloSwApp',
-        swFile: 'service-worker.js',  // Not yet plumbed through, must be service-worker.js
-    };
-
     var sw2cdv = require('sw2cdv');
-    return sw2cdv.create.ios(prjInfo)
-        .then(function() {
-            return sw2cdv.build.ios(prjInfo);
-        })
-        .done();
+    return sw2cdv.create.ios(prjInfo);
 });
 
-/******************************************************************************/
+gulp.task('buildios', [], function() {
+    var sw2cdv = require('sw2cdv');
+    return sw2cdv.build.ios(prjInfo);
+});
 
 gulp.task('runios', function() {
     var sw2cdv = require('sw2cdv');
     return sw2cdv.run.ios(path.resolve('build', 'ios'));
+});
+
+gulp.task('ios', function() {
+    return runSeq('createios', 'buildios', 'runios');
 });
 
 /******************************************************************************/

@@ -30,6 +30,15 @@ function createIos(prjInfo) {
     let IosProject = cordovaLib.IosProject;
     let proj = new IosProject();
     return proj.create(prjInfo)
+      .then(() => {
+        let et = require('elementtree');
+        let fs = require('fs');
+        let configXml = fs.readFileSync(path.join(prjInfo.paths.root, prjInfo.cfg.name(), 'config.xml')).toString();
+        let xml = et.parse(configXml);
+        xml.find('preference[@name="service_worker"]').attrib.value = (prjInfo.swFile || "sw.js");
+        let output = xml.write({'xml_declaration': false})
+        fs.writeFileSync(path.join(prjInfo.paths.root, prjInfo.cfg.name(), 'config.xml'), output);
+      });
 };
 
 /******************************************************************************/
