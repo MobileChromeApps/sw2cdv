@@ -9,8 +9,8 @@ let path = require('path');
 function createIos(prjInfo) {
     // Todo, should be in node_modules
     let sWpluginDirs = [
-        path.join(__dirname, '../../PromisesPlugin'),
-        path.join(__dirname, '../../cordova-plugin-serviceworker'),
+        path.join(__dirname, '../deps/PromisesPlugin'),
+        path.join(__dirname, '../deps/cordova-plugin-serviceworker'),
     ];
 
     prjInfo.paths = prjInfo.paths || {};
