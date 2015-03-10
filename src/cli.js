@@ -29,7 +29,7 @@ commands.create = (args) => {
 
     return create[target]({
         www: path.resolve(www),
-        root: path.resolve('.', 'sw2cdv_output'),
+        root: path.resolve('..', 'sw2cdv_output'),
     });
 };
 
@@ -51,7 +51,7 @@ commands.build = (args) => {
 
     return build[target]({
         www: path.resolve(www),
-        root: path.resolve('.', 'sw2cdv_output'),
+        root: path.resolve('..', 'sw2cdv_output'),
     });
 };
 
@@ -73,7 +73,7 @@ commands.run = (args) => {
 
     return run[target]({
         www: path.resolve(www),
-        root: path.resolve('.', 'sw2cdv_output'),
+        root: path.resolve('..', 'sw2cdv_output'),
     });
 };
 
