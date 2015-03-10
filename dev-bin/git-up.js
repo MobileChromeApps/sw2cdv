@@ -97,20 +97,29 @@ function initCommand() {
   }).then(function() {
     return spawn('npm', ['install']);
   }).then(function() {
-    return cloneOrUpdateGitRepo('https://github.com/vstirbu/PromisesPlugin.git', path.join(root, '..', 'PromisesPlugin'));
+    return cloneOrUpdateGitRepo('https://github.com/vstirbu/PromisesPlugin.git', path.join(root, 'deps', 'PromisesPlugin'));
   }).then(function() {
-    return cloneOrUpdateGitRepo('https://github.com/mwoghiren/cordova-plugin-serviceworker.git', path.join(root, '..', 'cordova-plugin-serviceworker'));
+    return cloneOrUpdateGitRepo('https://github.com/mwoghiren/cordova-plugin-serviceworker.git', path.join(root, 'deps', 'cordova-plugin-serviceworker'));
   }).then(function() {
-    process.chdir(path.join(root, '..', 'cordova-plugin-serviceworker'));
+    process.chdir(path.join(root, 'deps', 'cordova-plugin-serviceworker'));
     return spawn('git', ['checkout', 'coredata']);
   }).then(function() {
-    return cloneOrUpdateGitRepo('https://github.com/kamrik/cordova-lib.git', path.join(root, '..', 'kamrik-cordova-lib'));
+    return cloneOrUpdateGitRepo('https://github.com/kamrik/cordova-lib.git', path.join(root, 'deps', 'kamrik-cordova-lib'));
   }).then(function() {
-    process.chdir(path.join(root, '..', 'kamrik-cordova-lib'));
+    process.chdir(path.join(root, 'deps', 'kamrik-cordova-lib'));
     return spawn('git', ['checkout', 'api']);
   }).then(function() {
-    process.chdir(root);
-    return spawn('npm', ['link', path.join(root, '..', 'kamrik-cordova-lib', 'cordova-lib')]);
+    process.chdir(path.join(root, 'deps', 'kamrik-cordova-lib', 'cordova-lib'));
+    return spawn('npm', ['install']);
+  }).then(function() {
+    shelljs.rm('-rf', path.join(root, 'node_modules', 'cordova-lib'));
+    return shelljs.ln('-sf', path.join(root, 'deps', 'kamrik-cordova-lib', 'cordova-lib'), path.join(root, 'node_modules', 'cordova-lib'));
+  }).then(function() {
+    process.chdir(path.join(root, 'tests', 'gulp'));
+    return spawn('npm', ['install']);
+  }).then(function() {
+    shelljs.rm('-rf', path.join('node_modules', 'sw2cdv'));
+    return shelljs.ln('-sf', path.resolve(root), path.join('node_modules', 'sw2cdv'));
   }).done();
 }
 
