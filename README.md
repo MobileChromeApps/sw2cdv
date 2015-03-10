@@ -14,9 +14,6 @@ To try it:
 
 ```
 cd tests/gulp
-npm install
 ln -sf ../MwoghirenServiceWorkerSample/ app # Or any other SW app
-gulp clean
-gulp buildios
-gulp runios
+gulp ios
 ```
