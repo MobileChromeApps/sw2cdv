@@ -9,7 +9,12 @@ let co = require('co');
 
 /******************************************************************************/
 
-exports.chrome = function runChrome(root) {
+exports.chrome = function runChrome(prjInfo) {
+  if (typeof prjInfo === 'string') {
+    prjInfo = {
+      www: prjInfo, // TODO: "run chrome" needs www not root, but its odd that string input can mean one or the other
+    };
+  }
   let httpServer = require('http-server');
   let portfinder = require('portfinder');
   let openInChrome = require('./util/open-in-chrome');
@@ -18,7 +23,7 @@ exports.chrome = function runChrome(root) {
   const host = 'localhost';
 
   let server = httpServer.createServer({
-    root: root,
+    root: prjInfo.www,
     cache: -1,
     logFn: (request) => {
       console.log(`[${new Date}] ${request.method} ${request.url}`); // also: request.headers
@@ -49,18 +54,28 @@ exports.chrome = function runChrome(root) {
 
 /******************************************************************************/
 
-exports.android = function runAndroid(root) {
+exports.android = function runAndroid(prjInfo) {
+  if (typeof prjInfo === 'string') {
+    prjInfo = {
+      root: prjInfo
+    };
+  }
   return Q.reject('Not implemented');
 };
 
 /******************************************************************************/
 
-exports.ios = function runIos(root) {
+exports.ios = function runIos(prjInfo) {
+  if (typeof prjInfo === 'string') {
+    prjInfo = {
+      root: prjInfo
+    };
+  }
   let cordovaLib = require('cordova-lib');
   let IosProject = cordovaLib.IosProject;
 
   let proj = new IosProject();
-  return proj.open(root)
+  return proj.open(prjInfo.root)
     .then(() => {
       proj.run();
     });

@@ -8,10 +8,15 @@ let cordovaLib = require('cordova-lib');
 
 /******************************************************************************/
 
-function buildIos(root) {
+function buildIos(prjInfo) {
+    if (typeof prjInfo === 'string') {
+      prjInfo = {
+        root: prjInfo
+      };
+    }
     let IosProject = cordovaLib.IosProject;
     let proj = new IosProject();
-    return proj.open(root)
+    return proj.open(prjInfo.root)
         .then(() => {
             return proj.build();
         });
@@ -19,8 +24,13 @@ function buildIos(root) {
 
 /******************************************************************************/
 
-function buildAndroid(root) {
-  return Q.reject('Not implemented');
+function buildAndroid(prjInfo) {
+    if (typeof prjInfo === 'string') {
+        prjInfo = {
+            root: prjInfo
+        };
+    }
+    return Q.reject('Not implemented');
 };
 
 /******************************************************************************/

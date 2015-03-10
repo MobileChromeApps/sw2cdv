@@ -3,7 +3,6 @@
 /******************************************************************************/
 
 let path = require('path');
-let cordovaLib = require('cordova-lib');
 
 /******************************************************************************/
 
@@ -32,6 +31,8 @@ function createIos(prjInfo) {
 
     // Should be unnecessary when IosProject lives in cordova-ios
     prjInfo.paths.template = path.join(__dirname, '../node_modules/cordova-ios');
+
+    let cordovaLib = require('cordova-lib');
 
     if (!prjInfo.cfg) {
         let cfg = prjInfo.cfg = new cordovaLib.ConfigParser(path.join(__dirname, '..', 'assets', 'defaultConfig.xml'));
