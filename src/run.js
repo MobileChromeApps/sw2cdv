@@ -54,17 +54,6 @@ exports.chrome = function runChrome(prjInfo) {
 
 /******************************************************************************/
 
-exports.android = function runAndroid(prjInfo) {
-  if (typeof prjInfo === 'string') {
-    prjInfo = {
-      root: prjInfo
-    };
-  }
-  return Q.reject('Not implemented');
-};
-
-/******************************************************************************/
-
 exports.ios = function runIos(prjInfo) {
   if (typeof prjInfo === 'string') {
     prjInfo = {
@@ -72,9 +61,23 @@ exports.ios = function runIos(prjInfo) {
     };
   }
   let cordovaLib = require('cordova-lib');
-  let IosProject = cordovaLib.IosProject;
+  let proj = new cordovaLib.IosProject();
+  return proj.open(prjInfo.root)
+    .then(() => {
+      proj.run();
+    });
+};
 
-  let proj = new IosProject();
+/******************************************************************************/
+
+exports.android = function runAndroid(prjInfo) {
+  if (typeof prjInfo === 'string') {
+    prjInfo = {
+      root: prjInfo
+    };
+  }
+  let cordovaLib = require('cordova-lib');
+  let proj = new cordovaLib.AndroidProject();
   return proj.open(prjInfo.root)
     .then(() => {
       proj.run();

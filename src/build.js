@@ -30,7 +30,12 @@ function buildAndroid(prjInfo) {
             root: prjInfo
         };
     }
-    return Q.reject('Not implemented');
+    let AndroidProject = cordovaLib.AndroidProject;
+    let proj = new AndroidProject();
+    return proj.open(prjInfo.root)
+        .then(() => {
+            return proj.build();
+        });
 };
 
 /******************************************************************************/
