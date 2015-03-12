@@ -76,6 +76,34 @@ gulp.task('ios', function() {
 
 /******************************************************************************/
 
+gulp.task('createandroid', ['clean'], function() {
+    // Project definitions
+    fs.mkdirSync('build');
+
+    var sw2cdv = require('sw2cdv');
+    return sw2cdv.create.android({
+        www: path.resolve('app'),
+        root: path.resolve('build', 'android'),
+    });
+});
+
+gulp.task('buildandroid', [], function() {
+    var sw2cdv = require('sw2cdv');
+    return sw2cdv.build.android(path.resolve('build', 'android'));
+});
+
+gulp.task('runandroid', function() {
+    var sw2cdv = require('sw2cdv');
+    return sw2cdv.run.android(path.resolve('build', 'android'));
+});
+
+gulp.task('android', function() {
+    return runSeq('createandroid', 'buildandroid', 'runandroid');
+});
+
+
+/******************************************************************************/
+
 gulp.task('default', ['runInChrome'], function() {
 });
 
