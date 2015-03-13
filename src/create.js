@@ -30,23 +30,13 @@ function fixPrjInfo(prjInfo) {
         let cfg = prjInfo.cfg = new cordovaLib.ConfigParser(path.join(__dirname, '..', 'assets', 'defaultConfig.xml'));
         cfg.setName(manifest.name);
         cfg.setPackageName(manifest.app_id || 'io.cordova.DefaultSwApp');
-        // TODO: Change sw.js <preference>, add this functionality to ConfigParser
-        // cfg.setGlobalPreference(name="service_worker" value = manifest.service_worker)
+        cfg.setGlobalPreference('service_worker', manifest.service_worker);
     }
     return prjInfo;
 }
 
 function create(prjInfo, proj) {
-    return proj.create(prjInfo)
-      .then(() => {
-        let et = require('elementtree');
-        let fs = require('fs');
-        let configXml = fs.readFileSync(prjInfo.configPath).toString();
-        let xml = et.parse(configXml);
-        xml.find('preference[@name="service_worker"]').attrib.value = prjInfo.service_worker;
-        let output = xml.write({'xml_declaration': false})
-        fs.writeFileSync(prjInfo.configPath, output);
-      });
+    return proj.create(prjInfo);
 }
 
 /******************************************************************************/
@@ -68,7 +58,7 @@ function createIos(prjInfo) {
 
     let proj = new cordovaLib.IosProject();
     return create(prjInfo, proj);
-};
+}
 
 /******************************************************************************/
 
