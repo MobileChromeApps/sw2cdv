@@ -35,10 +35,6 @@ function fixPrjInfo(prjInfo) {
     return prjInfo;
 }
 
-function create(prjInfo, proj) {
-    return proj.create(prjInfo);
-}
-
 /******************************************************************************/
 
 function createIos(prjInfo) {
@@ -57,7 +53,7 @@ function createIos(prjInfo) {
     prjInfo.configPath = path.join(prjInfo.paths.root, prjInfo.cfg.name(), 'config.xml');
 
     let proj = new cordovaLib.IosProject();
-    return create(prjInfo, proj);
+    return proj.create(prjInfo);
 }
 
 /******************************************************************************/
@@ -70,7 +66,7 @@ function createAndroid(prjInfo) {
     prjInfo.configPath = path.join(prjInfo.paths.root, 'res', 'xml', 'config.xml');
 
     let proj = new cordovaLib.AndroidProject();
-    return create(prjInfo, proj);
+    return proj.create(prjInfo);
 }
 
 /******************************************************************************/

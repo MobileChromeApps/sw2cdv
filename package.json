@@ -32,7 +32,6 @@
     "cordova-android": "^3.7.1",
     "cordova-ios": "^3.8.0",
     "cordova-lib": "latest",
-    "elementtree": "^0.1.6",
     "http-server": "^0.7.5",
     "lodash": "^3.3.0",
     "minimist": "^1.1.0",
