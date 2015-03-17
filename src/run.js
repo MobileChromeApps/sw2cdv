@@ -60,9 +60,9 @@ exports.ios = function runIos(prjInfo) {
       root: prjInfo
     };
   }
-  let cordovaLib = require('cordova-lib');
-  let proj = new cordovaLib.IosProject();
-  return proj.open(prjInfo.root)
+  let pp = require('CordovaPlatformProject');
+  let proj = new pp.PlatformProject();
+  return proj.open('ios', prjInfo.root)
     .then(() => {
       proj.run();
     });
@@ -76,9 +76,9 @@ exports.android = function runAndroid(prjInfo) {
       root: prjInfo
     };
   }
-  let cordovaLib = require('cordova-lib');
-  let proj = new cordovaLib.AndroidProject();
-  return proj.open(prjInfo.root)
+  let pp = require('CordovaPlatformProject');
+  let proj = new pp.PlatformProject();
+  return proj.open('android', prjInfo.root)
     .then(() => {
       proj.run();
     });

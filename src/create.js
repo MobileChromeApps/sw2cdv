@@ -3,7 +3,8 @@
 /******************************************************************************/
 
 let path = require('path');
-let cordovaLib = require('cordova-lib');
+// let cordovaLib = require('cordova-lib');
+let pp = require('CordovaPlatformProject');
 
 /******************************************************************************/
 
@@ -27,7 +28,7 @@ function fixPrjInfo(prjInfo) {
     prjInfo.service_worker = manifest.service_worker || 'service-worker.js';
 
     if (!prjInfo.cfg) {
-        let cfg = prjInfo.cfg = new cordovaLib.ConfigParser(path.join(__dirname, '..', 'assets', 'defaultConfig.xml'));
+        let cfg = prjInfo.cfg = new pp.cdv.ConfigParser(path.join(__dirname, '..', 'assets', 'defaultConfig.xml'));
         cfg.setName(manifest.name);
         cfg.setPackageName(manifest.app_id || 'io.cordova.DefaultSwApp');
         cfg.setGlobalPreference('service_worker', manifest.service_worker);
@@ -35,7 +36,8 @@ function fixPrjInfo(prjInfo) {
     return prjInfo;
 }
 
-function create(prjInfo, proj) {
+function create(prjInfo) {
+    let proj = new pp.PlatformProject();
     return proj.create(prjInfo);
 }
 
@@ -43,6 +45,7 @@ function create(prjInfo, proj) {
 
 function createIos(prjInfo) {
     prjInfo = fixPrjInfo(prjInfo);
+    prjInfo.platform = 'ios';
 
     // Todo, should be in node_modules
     let sWpluginDirs = [
@@ -56,21 +59,17 @@ function createIos(prjInfo) {
     prjInfo.paths.template = path.join(__dirname, '../node_modules/cordova-ios');
     prjInfo.configPath = path.join(prjInfo.paths.root, prjInfo.cfg.name(), 'config.xml');
 
-    let proj = new cordovaLib.IosProject();
-    return create(prjInfo, proj);
+    return create(prjInfo);
 }
 
 /******************************************************************************/
 
 function createAndroid(prjInfo) {
     prjInfo = fixPrjInfo(prjInfo);
-
-    // Should be unnecessary when IosProject lives in cordova-ios
+    prjInfo.platform = 'android';
     prjInfo.paths.template = path.join(__dirname, '../node_modules/cordova-android');
-    prjInfo.configPath = path.join(prjInfo.paths.root, 'res', 'xml', 'config.xml');
 
-    let proj = new cordovaLib.AndroidProject();
-    return create(prjInfo, proj);
+    return create(prjInfo);
 }
 
 /******************************************************************************/
