@@ -14,6 +14,7 @@ function fixPrjInfo(prjInfo) {
     prjInfo.paths.plugins = (prjInfo.paths.plugins || []);
     prjInfo.paths.www = prjInfo.paths.www || prjInfo.www;
     prjInfo.paths.root = prjInfo.paths.root || prjInfo.root;
+    prjInfo.paths.icons = prjInfo.paths.icons || prjInfo.paths.www;
 
     let manifest;
     try {
@@ -32,6 +33,12 @@ function fixPrjInfo(prjInfo) {
         cfg.setName(manifest.name);
         cfg.setPackageName(manifest.app_id || 'io.cordova.DefaultSwApp');
         cfg.setGlobalPreference('service_worker', manifest.service_worker);
+        // TODO: figure out what to do with icon sizes.
+        if (manifest.icons) {
+            manifest.icons.forEach(function(icon) {
+                cfg.addElement('icon', {src: icon.src});
+            });
+        }
     }
     return prjInfo;
 }
