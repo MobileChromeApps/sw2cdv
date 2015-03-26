@@ -43,11 +43,6 @@ function fixPrjInfo(prjInfo) {
     return prjInfo;
 }
 
-function create(prjInfo) {
-    let proj = new pp.PlatformProject();
-    return proj.create(prjInfo);
-}
-
 /******************************************************************************/
 
 function createIos(prjInfo) {
@@ -66,7 +61,8 @@ function createIos(prjInfo) {
     prjInfo.paths.template = path.join(__dirname, '../node_modules/cordova-ios');
     prjInfo.configPath = path.join(prjInfo.paths.root, prjInfo.cfg.name(), 'config.xml');
 
-    return create(prjInfo);
+    let proj = new pp.PlatformProject();
+    return proj.create(prjInfo);
 }
 
 /******************************************************************************/
@@ -76,7 +72,8 @@ function createAndroid(prjInfo) {
     prjInfo.platform = 'android';
     prjInfo.paths.template = path.join(__dirname, '../node_modules/cordova-android');
 
-    return create(prjInfo);
+    let proj = new pp.PlatformProject();
+    return proj.create(prjInfo);
 }
 
 /******************************************************************************/
