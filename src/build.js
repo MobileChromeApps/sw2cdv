@@ -4,7 +4,8 @@
 
 // This should be eventaually replaced with
 // let IosProject = require('cordova-ios');
-let cordovaLib = require('cordova-lib');
+// let cordovaLib = require('cordova-lib');
+let pp = require('CordovaPlatformProject');
 
 /******************************************************************************/
 
@@ -14,13 +15,13 @@ function buildIos(prjInfo) {
         root: prjInfo
       };
     }
-    let IosProject = cordovaLib.IosProject;
-    let proj = new IosProject();
-    return proj.open(prjInfo.root)
+
+    let proj = new pp.PlatformProject();
+    return proj.open('ios', prjInfo.root)
         .then(() => {
             return proj.build();
         });
-};
+}
 
 /******************************************************************************/
 
@@ -30,13 +31,12 @@ function buildAndroid(prjInfo) {
             root: prjInfo
         };
     }
-    let AndroidProject = cordovaLib.AndroidProject;
-    let proj = new AndroidProject();
-    return proj.open(prjInfo.root)
+    let proj = new pp.PlatformProject();
+    return proj.open('android', prjInfo.root)
         .then(() => {
             return proj.build();
         });
-};
+}
 
 /******************************************************************************/
 
