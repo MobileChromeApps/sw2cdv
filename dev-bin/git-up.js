@@ -101,19 +101,13 @@ function initCommand() {
   }).then(function() {
     return cloneOrUpdateGitRepo('https://github.com/mwoghiren/cordova-plugin-serviceworker.git', path.join(root, 'deps', 'cordova-plugin-serviceworker'));
   }).then(function() {
-    process.chdir(path.join(root, 'deps', 'cordova-plugin-serviceworker'));
-    return spawn('git', ['checkout', 'coredata']);
+    return cloneOrUpdateGitRepo('https://github.com/kamrik/CordovaPlatformProject.git', path.join(root, 'deps', 'kamrik-CordovaPlatformProject'));
   }).then(function() {
-    return cloneOrUpdateGitRepo('https://github.com/kamrik/cordova-lib.git', path.join(root, 'deps', 'kamrik-cordova-lib'));
-  }).then(function() {
-    process.chdir(path.join(root, 'deps', 'kamrik-cordova-lib'));
-    return spawn('git', ['checkout', 'api']);
-  }).then(function() {
-    process.chdir(path.join(root, 'deps', 'kamrik-cordova-lib', 'cordova-lib'));
+    process.chdir(path.join(root, 'deps', 'kamrik-CordovaPlatformProject'));
     return spawn('npm', ['install']);
   }).then(function() {
-    shelljs.rm('-rf', path.join(root, 'node_modules', 'cordova-lib'));
-    return shelljs.ln('-sf', path.join(root, 'deps', 'kamrik-cordova-lib', 'cordova-lib'), path.join(root, 'node_modules', 'cordova-lib'));
+    shelljs.rm('-rf', path.join(root, 'node_modules', 'CordovaPlatformProject'));
+    return shelljs.ln('-sf', path.join(root, 'deps', 'kamrik-CordovaPlatformProject'), path.join(root, 'node_modules', 'CordovaPlatformProject'));
   }).then(function() {
     process.chdir(path.join(root, 'tests', 'gulp'));
     return spawn('npm', ['install']);
