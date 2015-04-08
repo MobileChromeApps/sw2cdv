@@ -32,7 +32,7 @@ function fixPrjInfo(prjInfo) {
         let cfg = prjInfo.cfg = new pp.cdv.ConfigParser(path.join(__dirname, '..', 'assets', 'defaultConfig.xml'));
         cfg.setName(manifest.name);
         cfg.setPackageName(manifest.app_id || 'io.cordova.DefaultSwApp');
-        cfg.setGlobalPreference('service_worker', manifest.service_worker);
+        cfg.setGlobalPreference('serviceworker', manifest.service_worker);
         // TODO: figure out what to do with icon sizes.
         if (manifest.icons) {
             manifest.icons.forEach(function(icon) {
