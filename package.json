@@ -27,11 +27,12 @@
   },
   "homepage": "https://github.com/MobileChromeApps/sw2cdv",
   "dependencies": {
+    "CordovaPlatformProject": "kamrik/CordovaPlatformProject",
     "babel": "^4.4.5",
     "co": "^4.4.0",
     "cordova-android": "^3.7.1",
     "cordova-ios": "^3.8.0",
-    "CordovaPlatformProject": "kamrik/CordovaPlatformProject",
+    "cordova-plugin-service-worker": "^1.0.1",
     "http-server": "^0.7.5",
     "lodash": "^3.3.0",
     "minimist": "^1.1.0",

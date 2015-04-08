@@ -99,7 +99,10 @@ function initCommand() {
   }).then(function() {
     return cloneOrUpdateGitRepo('https://github.com/vstirbu/PromisesPlugin.git', path.join(root, 'deps', 'PromisesPlugin'));
   }).then(function() {
-    return cloneOrUpdateGitRepo('https://github.com/mwoghiren/cordova-plugin-serviceworker.git', path.join(root, 'deps', 'cordova-plugin-serviceworker'));
+    return cloneOrUpdateGitRepo('https://github.com/MobileChromeApps/cordova-plugin-serviceworker.git', path.join(root, 'deps', 'cordova-plugin-serviceworker'));
+  }).then(function() {
+    shelljs.rm('-rf', path.join(root, 'node_modules', 'cordova-plugin-service-worker'));
+    return shelljs.ln('-sf', path.join(root, 'deps', 'cordova-plugin-serviceworker'), path.join(root, 'node_modules', 'cordova-plugin-service-worker'));
   }).then(function() {
     return cloneOrUpdateGitRepo('https://github.com/kamrik/CordovaPlatformProject.git', path.join(root, 'deps', 'kamrik-CordovaPlatformProject'));
   }).then(function() {
