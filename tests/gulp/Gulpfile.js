@@ -50,13 +50,12 @@ gulp.task('unlink', function() {
 /******************************************************************************/
 
 gulp.task('createios', ['clean'], function() {
-    // Project definitions
-    fs.mkdirSync('build');
-
     var sw2cdv = require('sw2cdv');
     return sw2cdv.create.ios({
-        www: path.resolve('app'),
-        root: path.resolve('build', 'ios'),
+        src: path.resolve('app'),
+        dest: path.resolve('build', 'ios'),
+        platform: path.resolve(path.join(__dirname, 'node_modules', 'cordova-ios')),
+        plugins: []
     });
 });
 
@@ -77,13 +76,12 @@ gulp.task('ios', function() {
 /******************************************************************************/
 
 gulp.task('createandroid', ['clean'], function() {
-    // Project definitions
-    fs.mkdirSync('build');
-
     var sw2cdv = require('sw2cdv');
     return sw2cdv.create.android({
-        www: path.resolve('app'),
-        root: path.resolve('build', 'android'),
+        src: path.resolve('app'),
+        dest: path.resolve('build', 'android'),
+        platform: path.resolve(path.join(__dirname, 'node_modules', 'cordova-ios')),
+        plugins: []
     });
 });
 
