@@ -22,49 +22,40 @@ gulp.task('clean', function(cb) {
 
 /******************************************************************************/
 
-gulp.task('link', ['unlink'], function() {
-    var nopt = require('nopt');
-    var args = nopt({'app': String});
-    var app = args.app || 'basic';
-    var appPath = path.join('..', 'GoogleChromeSamples', 'service-worker', app);
-    if (!fs.existsSync(appPath)) {
-        console.error('App "' + app + '" not found in ../samples/service-worker/');
-        return;
+gulp.task('check-app-exists', function() {
+    if (!fs.existsSync('app')) {
+        throw new Error('Please create an app/ folder.');
     }
-    fs.symlinkSync(appPath, 'app');
 });
 
 /******************************************************************************/
 
-gulp.task('unlink', function() {
-    if (!fs.existsSync('app'))
-        return;
-    var stats = fs.lstatSync('app');
-    if (!stats.isSymbolicLink()) {
-        console.error('./app is not a symlink');
-        return;
+gulp.task('check-build-exists', function() {
+    if (!fs.existsSync('build')) {
+        throw new Error('Please create a cordova project first.');
     }
-    fs.unlinkSync('app');
 });
 
 /******************************************************************************/
 
-gulp.task('createios', ['clean'], function() {
+gulp.task('createios', ['clean', 'check-app-exists'], function() {
     var sw2cdv = require('sw2cdv');
     return sw2cdv.create.ios({
         src: path.resolve('app'),
         dest: path.resolve('build', 'ios'),
-        platform: path.resolve(path.join(__dirname, 'node_modules', 'cordova-ios')),
-        plugins: []
+        platform: path.resolve('node_modules', 'cordova-ios'),
+        plugins: [
+            path.resolve('node_modules', 'cordova-plugin-device'),
+        ]
     });
 });
 
-gulp.task('buildios', [], function() {
+gulp.task('buildios', ['check-build-exists'], function() {
     var sw2cdv = require('sw2cdv');
     return sw2cdv.build.ios(path.resolve('build', 'ios'));
 });
 
-gulp.task('runios', function() {
+gulp.task('runios', ['check-build-exists'], function() {
     var sw2cdv = require('sw2cdv');
     return sw2cdv.run.ios(path.resolve('build', 'ios'));
 });
@@ -75,22 +66,24 @@ gulp.task('ios', function() {
 
 /******************************************************************************/
 
-gulp.task('createandroid', ['clean'], function() {
+gulp.task('createandroid', ['clean', 'check-app-exists'], function() {
     var sw2cdv = require('sw2cdv');
     return sw2cdv.create.android({
         src: path.resolve('app'),
         dest: path.resolve('build', 'android'),
-        platform: path.resolve(path.join(__dirname, 'node_modules', 'cordova-ios')),
-        plugins: []
+        platform: path.resolve('node_modules', 'cordova-android'),
+        plugins: [
+            path.resolve('node_modules', 'cordova-plugin-device')
+        ]
     });
 });
 
-gulp.task('buildandroid', [], function() {
+gulp.task('buildandroid', ['check-build-exists'], function() {
     var sw2cdv = require('sw2cdv');
     return sw2cdv.build.android(path.resolve('build', 'android'));
 });
 
-gulp.task('runandroid', function() {
+gulp.task('runandroid', ['check-build-exists'], function() {
     var sw2cdv = require('sw2cdv');
     return sw2cdv.run.android(path.resolve('build', 'android'));
 });
