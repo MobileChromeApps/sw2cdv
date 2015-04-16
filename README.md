@@ -22,6 +22,7 @@ To use the command line `sw2cdv`:
 
 ```
 cd tests/MwoghirenServiceWorkerSample/ # Or any other SW app
+sw2cdv create ios
 sw2cdv run ios
 ```
 
