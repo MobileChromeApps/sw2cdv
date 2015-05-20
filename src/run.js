@@ -60,7 +60,7 @@ exports.ios = function runIos(prjInfo) {
       root: prjInfo
     };
   }
-  let pp = require('CordovaPlatformProject');
+  let pp = require('cordova-platform-project');
   let proj = new pp.PlatformProject();
   return proj.open('ios', prjInfo.root)
     .then(() => {
@@ -76,7 +76,7 @@ exports.android = function runAndroid(prjInfo) {
       root: prjInfo
     };
   }
-  let pp = require('CordovaPlatformProject');
+  let pp = require('cordova-platform-project');
   let proj = new pp.PlatformProject();
   return proj.open('android', prjInfo.root)
     .then(() => {

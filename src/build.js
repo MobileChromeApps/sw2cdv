@@ -5,7 +5,7 @@
 // This should be eventaually replaced with
 // let IosProject = require('cordova-ios');
 // let cordovaLib = require('cordova-lib');
-let pp = require('CordovaPlatformProject');
+let pp = require('cordova-platform-project');
 
 /******************************************************************************/
 

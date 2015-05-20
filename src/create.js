@@ -3,7 +3,7 @@
 /******************************************************************************/
 
 let path = require('path');
-let pp = require('CordovaPlatformProject');
+let pp = require('cordova-platform-project');
 let shelljs = require('shelljs');
 
 /******************************************************************************/
