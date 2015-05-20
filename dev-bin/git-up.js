@@ -104,14 +104,6 @@ function initCommand() {
     shelljs.rm('-rf', path.join(root, 'node_modules', 'cordova-plugin-service-worker'));
     return shelljs.ln('-sf', path.join(root, 'deps', 'cordova-plugin-service-worker'), path.join(root, 'node_modules', 'cordova-plugin-service-worker'));
   }).then(function() {
-    return cloneOrUpdateGitRepo('https://github.com/kamrik/CordovaPlatformProject.git', path.join(root, 'deps', 'kamrik-CordovaPlatformProject'));
-  }).then(function() {
-    process.chdir(path.join(root, 'deps', 'kamrik-CordovaPlatformProject'));
-    return spawn('npm', ['install']);
-  }).then(function() {
-    shelljs.rm('-rf', path.join(root, 'node_modules', 'CordovaPlatformProject'));
-    return shelljs.ln('-sf', path.join(root, 'deps', 'kamrik-CordovaPlatformProject'), path.join(root, 'node_modules', 'CordovaPlatformProject'));
-  }).then(function() {
     process.chdir(path.join(root, 'tests', 'gulp'));
     return spawn('npm', ['install']);
   }).then(function() {
