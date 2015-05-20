@@ -105,10 +105,11 @@ function initCommand() {
     return shelljs.ln('-sf', path.join(root, 'deps', 'cordova-plugin-service-worker'), path.join(root, 'node_modules', 'cordova-plugin-service-worker'));
   }).then(function() {
     process.chdir(path.join(root, 'tests', 'gulp'));
-    return spawn('npm', ['install']);
-  }).then(function() {
     shelljs.rm('-rf', path.join('node_modules', 'sw2cdv'));
+    shelljs.mkdir('-p', 'node_modules');
     return shelljs.ln('-sf', path.resolve(root), path.join('node_modules', 'sw2cdv'));
+  }).then(function() {
+    return spawn('npm', ['install']);
   }).done();
 }
 
