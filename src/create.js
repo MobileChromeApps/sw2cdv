@@ -55,7 +55,7 @@ function createIos(prjInfo) {
 
     let sWpluginDirs = [
         path.join(__dirname, '../deps/PromisesPlugin'), // TODO: should be in node_modules
-        path.join(__dirname, '../node_modules/cordova-plugin-service-worker'),
+        path.join(__dirname, '../deps/cordova-plugin-service-worker'),
     ];
     prjInfo.paths.plugins = prjInfo.paths.plugins.concat(sWpluginDirs);
 
