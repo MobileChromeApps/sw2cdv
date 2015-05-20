@@ -1,6 +1,6 @@
 {
   "name": "sw2cdv",
-  "version": "0.0.1-dev",
+  "version": "0.0.3-dev",
   "description": "Turn a Web App Manifest ServiceWorker website into a Cordova Packaged Application",
   "preferGlobal": false,
   "keywords": [
